@@ -71,6 +71,7 @@ public class RemotePlayer extends Player {
         for (int i = 0; i < 80; i++)
             writer.print("*");
         writer.println("\n");
+        writer.println("finish");
     }
 
     /**
@@ -82,17 +83,12 @@ public class RemotePlayer extends Player {
     @Override
     public char chooseLetter(Game game) {
         for (;;) {
-            System.out.println("ins");
             writer.println("Inserisci una lettera: ");
-            System.out.println("pr");
             String line = null;
             try {
-                System.out.println("preread");
                 line = reader.readLine().trim();
-                System.out.println("readline" + line);
             } catch (IOException e) {
                 line = "";
-                System.out.println("ex");
             }
             if (line.length() == 1 && Character.isLetter(line.charAt(0))) {
                 return line.charAt(0);

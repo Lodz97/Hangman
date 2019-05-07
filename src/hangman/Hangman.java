@@ -28,16 +28,12 @@ public class Hangman {
      * @param player the participant to the game
      */
     public void playGame(Player player) {
-        System.out.println("play");
         Game game = new Game(dict.pickWord());
         game.addObserver(player);
         game.notifyObservers();
         while (game.getResult() == GameResult.OPEN) {
-            System.out.println("choose");
             char c = player.chooseLetter(game);
-            System.out.println("attempt");
             game.makeAttempt(c);
-            System.out.println("postattempt");
         }
     }
 }

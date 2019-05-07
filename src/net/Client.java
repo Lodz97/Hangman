@@ -45,26 +45,26 @@ public class Client
 
             Console console = System.console();
             String line;
-            String text;
+            boolean end = false;
             do
             {
-                //while(!(line = reader.readLine()).equals("Inserisci una lettera: "))
                 while((line = reader.readLine()) != null)
                 {
                     if(line.equals("Inserisci una lettera: "))
                     {
                         System.out.print(line);
                     }
+                    else if(line.equals("finish"))
+                    {
+                        up.stopThread();
+                        end = true;
+                    }
                     else
                     {
                         System.out.println(line);
                     }
                 }
-                //System.out.print("Inserisci una lettera: ");
-                text = console.readLine();
-                System.out.print("ss " + text);
-                writer.println(text);
-            } while (!text.equals("close"));
+            } while(!end);
 
         }
         catch (UnknownHostException ex)
@@ -104,8 +104,6 @@ class BackgroundUpdate extends Thread
         {
             try
             {
-                InputStream input = socket.getInputStream();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(input));
                 OutputStream output = socket.getOutputStream();
                 PrintWriter writer = new PrintWriter(output, true);
 
@@ -125,7 +123,6 @@ class BackgroundUpdate extends Thread
             }
             catch (InterruptedException ex)
             {
-                ex.printStackTrace();
                 System.out.println("Client closed");
             }
         }
