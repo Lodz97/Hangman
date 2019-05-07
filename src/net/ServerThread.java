@@ -35,7 +35,9 @@ public class ServerThread extends Thread
             OutputStream output = socket.getOutputStream();
             writer = new PrintWriter(output, true);
 
+            System.out.println("start");
             new RemoteGame(writer, reader);
+            System.out.println("finish");
 
             socket.close();
         }

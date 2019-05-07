@@ -31,7 +31,7 @@ public class RemoteGame {
         this.reader = reader;
         this.writer = writer;
         Hangman game = new Hangman();
-        Player player = new RemotePlayer(writer, reader);
+        Player player = new RemotePlayer(this.writer, this.reader);
         // Player player = new ArtificialPlayer();
         game.playGame(player);
     }
