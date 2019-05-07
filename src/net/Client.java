@@ -38,11 +38,14 @@ public class Client
 
             Console console = System.console();
             String text;
+            String txt;
 
             do
             {
                 InputStream input = socket.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+                txt = console.readLine("");
+                writer.println(txt);
                 text = reader.readLine();
                 System.out.println(text);
 
