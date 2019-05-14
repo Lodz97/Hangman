@@ -36,9 +36,29 @@ public class ServerThread extends Thread
             writer = new PrintWriter(output, true);
 
             System.out.println("start");
-            new RemoteGame(writer, reader);
-            System.out.println("finish");
 
+            String line;
+            do
+            {
+                writer.println("Cosa vuoi fare? (info) (gioca)");
+                line = reader.readLine();
+                switch(line)
+                {
+                    case "info":
+                        ArrayList<Integer> data = server.getInfo(socket.getRemoteSocketAddress().toString());
+                        writer.println("Partite perse: " + data.get(0) + "\nPartite vinte: " + data.get(1));
+                        break;
+                    case "gioca":
+                        ArrayList<Integer> dat = server.getInfo(socket.getRemoteSocketAddress().toString());
+                        new RemoteGame(writer, reader, dat);
+                        break;
+                    default:
+                        writer.println("Comando errato");
+                        break;
+                }
+            }while(!line.equals("gioca"));
+
+            System.out.println("finish");
             socket.close();
         }
         catch (IOException ex)

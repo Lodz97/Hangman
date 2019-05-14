@@ -27,7 +27,7 @@ public class Hangman {
      * 
      * @param player the participant to the game
      */
-    public void playGame(Player player) {
+    public GameResult playGame(Player player) {
         Game game = new Game(dict.pickWord());
         game.addObserver(player);
         game.notifyObservers();
@@ -35,5 +35,6 @@ public class Hangman {
             char c = player.chooseLetter(game);
             game.makeAttempt(c);
         }
+        return game.getResult();
     }
 }
